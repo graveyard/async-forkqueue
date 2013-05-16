@@ -1,5 +1,5 @@
 # Async-ForkQueue
-Async-ForkQueue is based on [https://github.com/andrewjstone/forkqueue](ForkQueue), but it allows setting a level of concurrency where each forked process will run that many at a time and provides a api for creating worker functions.
+Async-ForkQueue is based on (https://github.com/andrewjstone/forkqueue)[ForkQueue], but it allows setting a level of concurrency where each forked process will run that many at a time and provides a api for creating worker functions.
 
 ## Install
 
