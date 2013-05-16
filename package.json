@@ -1,0 +1,22 @@
+{
+  "name": "async-forkqueue",
+  "version": "0.0.0",
+  "description": "a queue that runs workers asynchronously in child processes",
+  "main": "index.js",
+  "scripts": {
+    "test": "make -Br test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azylman/async-forkqueue.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "967b2facd3c5f02caef6c2ef9a69a8c2bb6b321e",
+  "dependencies": {
+    "forkqueue": "0.0.8",
+    "coffee-script": "~1.6.2",
+    "underscore": "~1.4.4"
+  }
+}
