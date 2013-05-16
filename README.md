@@ -13,7 +13,7 @@ var Queue = require('async-forkqueue');
 var num_workers = 4;
 var concurrency = 4;
 
-var queue = new Queue num_workers, concurrency, module_path
+var queue = new Queue(num_workers, concurrency, module_path);
 
 for (var i = 0; i < 100; i++) {
   queue.push(i);
@@ -30,6 +30,6 @@ A simple worker is below.
 ```javascript
 module.exports = function (payload, cb) {
   // Do something with the payload
-  cb()
+  cb();
 }
 ```
