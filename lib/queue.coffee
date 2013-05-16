@@ -1,4 +1,3 @@
-ForkQueue = require 'forkqueue'
 cp = require 'child_process'
 _ = require 'underscore'
 {EventEmitter} = require 'events'
