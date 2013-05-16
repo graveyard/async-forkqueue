@@ -4,7 +4,7 @@ Async-ForkQueue is based on [https://github.com/andrewjstone/forkqueue](ForkQueu
 ## Install
 
 <pre>
-  npm install quest
+  npm install async-forkqueue
 </pre>
 
 ## API
