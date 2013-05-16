@@ -12,7 +12,7 @@ class AsyncWorker extends EventEmitter
       # Data comes in the format {event: message}
       event = _(data).keys()[0]
       message = _(data).values()[0]
-      debug "got event #{event} #{message}"
+      debug "got event #{JSON.stringify data} #{event} #{message}"
       @emit event, message
     @on 'done', => @in_progress--
     @on 'error', => @in_progress--
