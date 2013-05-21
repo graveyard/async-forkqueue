@@ -25,8 +25,6 @@ class AsyncWorker extends EventEmitter
 
 module.exports = class Queue extends EventEmitter
   constructor: (@num_workers, @concurrency, @worker_module, @options={}) ->
-    # Used in the test cases
-    _(@options).defaults accumulate: false
     @workers = []
     @queue = []
     @results = []
@@ -40,8 +38,8 @@ module.exports = class Queue extends EventEmitter
     worker = new AsyncWorker @worker_module, @concurrency
     worker.on 'done', (result) =>
       debug "got done with result #{result}"
+      @emit 'data', result
       @_flush()
-      @results.push result if @options.accumulate
     worker.on 'error', (err) =>
       debug "got error with err #{err}"
       @error = err
@@ -63,7 +61,4 @@ module.exports = class Queue extends EventEmitter
     @_kill_workers()
     debug "done running everything."
     debug "got err: #{util.inspect @error, true}"
-    debug "got results: #{@options.accumulate}"
-    return cb() unless @error or @options.accumulate
-    return cb @error if @error
-    return cb null, @results
+    cb @error
