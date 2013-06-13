@@ -21,7 +21,12 @@ class AsyncWorker extends EventEmitter
     @worker.send payload
     @in_progress++
   can_handle: => @concurrency - @in_progress
-  kill: => @worker.disconnect()
+  kill: =>
+    try
+      @worker.disconnect()
+    catch err
+      return if err.message is "IPC channel is already disconnected" # Doesn't matter, had disconnect
+      throw err
 
 module.exports = class Queue extends EventEmitter
   constructor: (@num_workers, @concurrency, @worker_module, @options={}) ->
