@@ -1,6 +1,6 @@
 {
   "name": "async-forkqueue",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "a queue that runs workers asynchronously in child processes",
   "main": "index.js",
   "scripts": {
