@@ -24,6 +24,7 @@ class AsyncWorker extends EventEmitter
   kill: =>
     try
       @worker.disconnect()
+      @worker.kill()
     catch err
       return if err.message is "IPC channel is already disconnected" # Doesn't matter, had disconnect
       throw err
