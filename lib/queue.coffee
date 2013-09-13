@@ -1,8 +1,10 @@
-cp = require 'child_process'
-_ = require 'underscore'
+_              = require 'underscore'
+cp             = require 'child_process'
+debug          = require('debug') 'async_forkqueue:queue'
 {EventEmitter} = require 'events'
-debug = require('debug')('async_forkqueue:queue');
-util = require 'util'
+util           = require 'util'
+
+nextTick = require('timers').setImmediate or process.nextTick
 
 class AsyncWorker extends EventEmitter
   constructor: (@worker_module, @concurrency) ->
@@ -61,10 +63,12 @@ module.exports = class Queue extends EventEmitter
     @queue.push payload if not @error
     @_flush()
   end: (cb) =>
+    return nextTick(=> cb()) if @_ended
     if @queue.length isnt 0 or @_unfinished_workers().length isnt 0
       @_flush()
-      return process.nextTick => @end cb
+      return nextTick => @end cb
     @_kill_workers()
+    @_ended = true
     debug "done running everything."
     debug "got err: #{util.inspect @error, true}"
     cb @error
