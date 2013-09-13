@@ -63,12 +63,10 @@ module.exports = class Queue extends EventEmitter
     @queue.push payload if not @error
     @_flush()
   end: (cb) =>
-    return nextTick(=> cb()) if @_ended
     if @queue.length isnt 0 or @_unfinished_workers().length isnt 0
       @_flush()
       return nextTick => @end cb
     @_kill_workers()
-    @_ended = true
     debug "done running everything."
     debug "got err: #{util.inspect @error, true}"
     cb @error

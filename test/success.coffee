@@ -13,4 +13,4 @@ describe 'async-forkqueue', ->
       assert.ifError err
       assert.equal results.length, nums.length
       assert i*i in results for i in nums.length
-      done()
+      queue.end done
